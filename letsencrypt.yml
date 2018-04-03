@@ -1,0 +1,31 @@
+version: "3.1"
+services:
+  letsencrypt-tool:
+    image: registry.base2d.com/operations/letsencrypt:1.1
+    deploy:
+      replicas: 1
+      restart_policy:
+        condition: on-failure
+      labels:
+        com.docker.ucp.access.label: /core-ops
+    volumes:
+      - letsencrypt_certstore:/autocerts
+    secrets:
+      - source: CERTS_AWS_ACCESS_KEY_ID
+        target: AWS_ACCESS_KEY_ID
+        mode: 0444
+      - source: CERTS_AWS_SECRET_ACCESS_KEY
+        target: AWS_SECRET_ACCESS_KEY
+        mode: 0444
+    entrypoint: /bin/bash
+    tty: true
+
+secrets:
+  CERTS_AWS_ACCESS_KEY_ID:
+    external: true
+  CERTS_AWS_SECRET_ACCESS_KEY:
+    external: true
+
+volumes:
+  letsencrypt_certstore:
+    external: true
