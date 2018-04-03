@@ -6,7 +6,7 @@ This tool creates [Let's Encrypt](https://letsencrypt.org/) certificates using [
 Usage
 ----------------------
 ### Building the Docker Image
-***Note: This process is automated and you can optionally use the public image hosted on the docker registry at <> if you don't want to build it yourself.***
+***Note: This process is automated and you can optionally use the public image hosted on the docker registry at base2s/letsencrypt-cert-tool if you don't want to build it yourself.***
 1. Build and tag an image by using the Dockerfile in this directory.
 ```
 docker build --rm -t <image_name> .
@@ -30,7 +30,7 @@ docker volume create autocerts
 
 2. Run the container, making sure to set the environment variables appropriately.
 ```
-docker run --rm -it -e "AWS_ACCESS_KEY_ID=<Access Key ID>" -e "AWS_SECRET_ACCESS_KEY=<Secret Access Key>" -e "CERTBOT_EMAIL=<Registration Email>" -v <volume name>:/autocerts base2Solutions/letsencrypt-cert-tool --domains <domain>
+docker run --rm -it -e "AWS_ACCESS_KEY_ID=<Access Key ID>" -e "AWS_SECRET_ACCESS_KEY=<Secret Access Key>" -e "CERTBOT_EMAIL=<Registration Email>" -v <volume name>:/autocerts base2s/letsencrypt-cert-tool --domains <domain>
 ```
 Upon completion, you should see a log message similar to the following.
 ```
