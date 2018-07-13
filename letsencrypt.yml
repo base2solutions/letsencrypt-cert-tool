@@ -2,6 +2,8 @@ version: "3.1"
 services:
   letsencrypt-tool:
     image: registry.base2d.com/operations/letsencrypt:1.1
+    environment:
+      - CERTBOT_EMAIL=email_address@site.com
     deploy:
       replicas: 1
       restart_policy:
