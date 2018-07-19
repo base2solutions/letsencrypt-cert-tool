@@ -1,7 +1,7 @@
 version: "3.1"
 services:
   letsencrypt-tool:
-    image: registry.base2d.com/operations/letsencrypt:1.1
+    image: registry.base2d.com/operations/letsencrypt:2.1
     environment:
       - CERTBOT_EMAIL=email_address@site.com
     deploy:
@@ -10,6 +10,8 @@ services:
         condition: on-failure
       labels:
         com.docker.ucp.access.label: /core-ops
+      placement:
+        constraints: [node.role == worker]
     volumes:
       - letsencrypt_certstore:/autocerts
     secrets:
@@ -19,7 +21,7 @@ services:
       - source: CERTS_AWS_SECRET_ACCESS_KEY
         target: AWS_SECRET_ACCESS_KEY
         mode: 0444
-    entrypoint: /bin/bash
+    entrypoint: /bin/sh
     tty: true
 
 secrets:

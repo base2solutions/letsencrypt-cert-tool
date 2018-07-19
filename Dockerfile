@@ -5,7 +5,10 @@ RUN apk -v --update add \
         py-pip \
         certbot \
         bash \
-        && \
+        --virtual certbot-openssl \
+        qt-dev \
+        openssl \
+    && \
     pip install --upgrade awscli==1.15.40 && \
     pip install --upgrade requests-toolbelt && \
     apk -v --purge del py-pip \
