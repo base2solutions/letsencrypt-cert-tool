@@ -1,4 +1,4 @@
-FROM alpine:edge
+FROM registry2.base2d.com/ops/alpine:3.9
 
 RUN apk -v --update add \
         python \
